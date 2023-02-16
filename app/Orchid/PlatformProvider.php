@@ -28,12 +28,9 @@ class PlatformProvider extends OrchidServiceProvider
   public function registerMainMenu(): array
   {
     return [
-      Menu::make('Dropdown menu')
-        ->icon('code')
-        ->list([
-          Menu::make('Sub element item 1')->icon('bag'),
-          Menu::make('Sub element item 2')->icon('heart'),
-        ]),
+      Menu::make(__('Chat'))
+        ->icon('bubble')
+        ->route('page.chat'),
 
       Menu::make(__('Users'))
         ->icon('user')

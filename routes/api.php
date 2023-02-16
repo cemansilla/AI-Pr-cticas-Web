@@ -15,5 +15,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+  return $request->user();
+});
+
+Route::prefix('pyapi')->group(function () {
+  Route::post('chat', [App\Http\Controllers\API\FastAPIController::class, 'chat']);
 });
