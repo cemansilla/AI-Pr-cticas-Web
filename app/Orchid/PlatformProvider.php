@@ -32,6 +32,10 @@ class PlatformProvider extends OrchidServiceProvider
         ->icon('bubble')
         ->route('page.chat'),
 
+      Menu::make(__('Brainstorming'))
+        ->icon('chemistry')
+        ->route('page.brainstorming'),
+
       Menu::make(__('Users'))
         ->icon('user')
         ->route('platform.systems.users')

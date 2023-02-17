@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Orchid\Screens\DashboardScreen;
 use App\Orchid\Screens\ChatScreen;
+use App\Orchid\Screens\BrainstormingScreen;
 
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
@@ -38,6 +39,9 @@ Route::screen('/dashboard', DashboardScreen::class)
 
 Route::screen('/chat', ChatScreen::class)
   ->name('page.chat');
+
+Route::screen('/brainstorming', BrainstormingScreen::class)
+  ->name('page.brainstorming');
 
 // Platform > Profile
 Route::screen('profile', UserProfileScreen::class)
