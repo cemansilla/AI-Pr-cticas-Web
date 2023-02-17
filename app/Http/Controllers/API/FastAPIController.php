@@ -82,7 +82,8 @@ class FastAPIController extends Controller
       ]);
   
       $response = [
-        'success' => false
+        'success' => false,
+        'error_message' => 'UNKNOWN'
       ];
       if($api_response->getStatusCode() == 200){
         $message_response = $api_response->getBody()->getContents();
@@ -99,6 +100,49 @@ class FastAPIController extends Controller
       $response = [
         'success' => false,
         'error_message' => 'El disparador o concepto es requerido.'
+      ];
+    }
+
+    return response()->json($response);
+  }
+
+  public function obsidian(Request $request)
+  {
+    $materia = $request->input('materia');
+    $temas = $request->input('temas');
+
+    if(!is_null($materia) && !is_null($temas)){
+      $message = "Generar un resúmen para la materia {$materia}.";
+      $message .= " Debe incluir los temas: {$temas}.";
+      $message .= " La respuesta debe estar en formato markdown. Estructurarlo divido por temas, con links internos a cada uno. Los links deben estar en una tabla de contenidos.";
+
+      $data = [
+        'prompt' => $message
+      ];
+  
+      $api_response = $this->client->post(env('API_PYTHON_BASE_URL') . "pyapi/chat", [
+        'json' => $data
+      ]);
+  
+      $response = [
+        'success' => false,
+        'error_message' => 'UNKNOWN'
+      ];
+      if($api_response->getStatusCode() == 200){
+        $message_response = $api_response->getBody()->getContents();
+        $message_response = str_replace('"', '', $message_response);
+        $message_response = trim($message_response);
+        $message_response = str_replace("\n", "<br>", $message_response);
+
+        $response = [
+          'success' => true,
+          'message' => $message_response
+        ];
+      }
+    }else{
+      $response = [
+        'success' => false,
+        'error_message' => 'La materia y el tema son requeridos.'
       ];
     }
 

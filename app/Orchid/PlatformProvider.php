@@ -36,6 +36,10 @@ class PlatformProvider extends OrchidServiceProvider
         ->icon('chemistry')
         ->route('page.brainstorming'),
 
+      Menu::make(__('Obsidian'))
+        ->icon('diamond')
+        ->route('page.obsidian'),
+
       Menu::make(__('Users'))
         ->icon('user')
         ->route('platform.systems.users')

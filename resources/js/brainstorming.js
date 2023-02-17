@@ -14,14 +14,14 @@ document.addEventListener("turbo:load", () => {
     }
   }
 
-  const btn_BSubmit = document.getElementById('form_brainstorming_submit');
+  const btn_BSubmit = document.getElementById('btn_brainstorming_submit');
   const proposalContainer = document.getElementById('proposal_container');
   const objetivo = document.querySelector('#input_prompt');
   const destino = document.querySelector('#input_destination');
   const excluir = document.querySelector('#input_exclude');
 
   if(btn_BSubmit!=null && proposalContainer != null && objetivo!=null && destino!=null && excluir!=null){
-    btn_BSubmit.addEventListener('click', function (event) {
+    btn_BSubmit.addEventListener('click', function() {
       proposalContainer.innerHTML = "";
       controlLoading(true);
 
@@ -33,16 +33,20 @@ document.addEventListener("turbo:load", () => {
 
       axios.post('/api/pyapi/brainstorming', data)
         .then(response => {
-          let proposal = response.data.message;
-          proposal = proposal.replace(/\n/g, "<br>");
-          proposal = proposal.replace(/\\n/g, '<br>');
-          proposalContainer.innerHTML = proposal;
-          
-          console.log(response.data);
-          controlLoading(false);
+          if(response.data.success){
+            let proposal = response.data.message;
+            proposal = proposal.replace(/\n/g, "<br>");
+            proposal = proposal.replace(/\\n/g, '<br>');
+            proposalContainer.innerHTML = proposal;
+
+            controlLoading(false);
+          }else{
+            alert("Ha ocurrido un error: " + response.data.error_message);
+            controlLoading(false);
+          }          
         })
         .catch(error => {        
-          console.log(error);
+          alert("Ha ocurrido un error");
           controlLoading(false);
         });
     });

@@ -30,7 +30,7 @@
               <input type="text" class="form-control" id="input_exclude" placeholder="Listar palabras separadas por comas">
             </div>
     
-            <button id="form_brainstorming_submit" type="submit" class="btn btn-primary">Generar</button>
+            <button id="btn_brainstorming_submit" type="submit" class="btn btn-primary">Generar</button>
           </form>
         </div>
         <div class="col-md-6">

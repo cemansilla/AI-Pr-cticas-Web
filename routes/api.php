@@ -21,4 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('pyapi')->group(function () {
   Route::post('chat', [App\Http\Controllers\API\FastAPIController::class, 'chat']);
   Route::post('brainstorming', [App\Http\Controllers\API\FastAPIController::class, 'brainstorming']);
+  Route::post('obsidian', [App\Http\Controllers\API\FastAPIController::class, 'obsidian']);
 });

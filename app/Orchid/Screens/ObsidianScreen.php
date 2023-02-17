@@ -5,7 +5,7 @@ namespace App\Orchid\Screens;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
 
-class BrainstormingScreen extends Screen
+class ObsidianScreen extends Screen
 {
   /**
    * Fetch data to be displayed on the screen.
@@ -24,7 +24,12 @@ class BrainstormingScreen extends Screen
    */
   public function name(): ?string
   {
-    return 'Brainstorming / Disparador de ideas';
+    return 'Obsidian';
+  }
+
+  public function description(): ?string
+  {
+    return 'Generador de archivos markdown para Obsidian.';
   }
 
   /**
@@ -45,7 +50,7 @@ class BrainstormingScreen extends Screen
   public function layout(): iterable
   {
     return [
-      Layout::view('pages.brainstorming'),
+      Layout::view('pages.obsidian'),
     ];
   }
 }
