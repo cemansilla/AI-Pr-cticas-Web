@@ -1,19 +1,6 @@
+import { controlLoading } from './helpers';
+
 document.addEventListener("turbo:load", () => {
-  function controlLoading(activate, text = "Loading...") {
-    var loading = document.getElementById("spinner-container");
-
-    if(loading!=null){
-      if(activate){
-        document.getElementById("spinner-text").innerHTML = text;
-        loading.classList.remove("hidden");
-      }else{
-        if (!loading.classList.contains("hidden")) {
-          loading.classList.add("hidden");
-        }
-      }      
-    }
-  }
-
   const btn_OSubmit = document.getElementById('btn_obsidian_submit');  
   const proposalMdContainer = document.getElementById('obsidian_md_container');
   const materia = document.querySelector('#input_obsidian_materia');

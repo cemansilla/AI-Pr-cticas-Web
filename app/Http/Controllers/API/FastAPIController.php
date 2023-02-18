@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
@@ -41,6 +42,11 @@ class FastAPIController extends Controller
 
   public function brainstorming(Request $request)
   {
+    $response = [
+      'success' => false,
+      'error_message' => 'UNKNOWN'
+    ];
+
     $objetivo = $request->input('objetivo');
     $destino = $request->input('destino');
     $excluir = $request->input('excluir');
@@ -80,11 +86,7 @@ class FastAPIController extends Controller
       $api_response = $this->client->post(env('API_PYTHON_BASE_URL') . "pyapi/chat", [
         'json' => $data
       ]);
-  
-      $response = [
-        'success' => false,
-        'error_message' => 'UNKNOWN'
-      ];
+      
       if($api_response->getStatusCode() == 200){
         $message_response = $api_response->getBody()->getContents();
         $message_response = str_replace('"', '', $message_response);
@@ -101,6 +103,61 @@ class FastAPIController extends Controller
         'success' => false,
         'error_message' => 'El disparador o concepto es requerido.'
       ];
+    }
+
+    return response()->json($response);
+  }
+
+  public function voice(Request $request)
+  {
+    $response = [
+      'success' => false,
+      'error_message' => 'UNKNOWN'
+    ];
+
+    if($request->hasFile('audio_file') && $request->file('audio_file')->isValid()) {
+      try{
+        $folder = 'audio';
+        $file = $request->file('audio_file');
+        $fileName = $file->getClientOriginalName();
+        $filePath = $file->storeAs($folder, $fileName);
+        $fileContent = fopen(storage_path("app\\" . $filePath), 'r');
+
+        $api_response = $this->client->post(env('API_PYTHON_BASE_URL') . "pyapi/audio", [
+          'multipart' => [
+            [
+              'name' => 'file',
+              'contents' => $fileContent,
+            ],
+            [
+              'name' => 'file_name',
+              'contents' => $fileName
+            ],
+          ]
+        ]);
+
+        if($api_response->getStatusCode() == 200){
+          $message_response = $api_response->getBody()->getContents();
+          $message_response = str_replace('"', '', $message_response);
+          $message_response = trim($message_response);
+          $message_response = str_replace("\n", "<br>", $message_response);
+
+          $response = [
+            'success' => true,
+            'message' => $message_response
+          ];
+        }else{
+          $response = [
+            'success' => false,
+            'error_message' => $api_response->getBody()->getContents()
+          ];
+        }
+      }catch(\Exception $e){
+        $response = [
+          'success' => false,
+          'error_message' => $e->getMessage()
+        ];
+      }
     }
 
     return response()->json($response);

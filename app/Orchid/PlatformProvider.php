@@ -30,7 +30,8 @@ class PlatformProvider extends OrchidServiceProvider
     return [
       Menu::make(__('Chat'))
         ->icon('bubble')
-        ->route('page.chat'),
+        ->route('page.chat')
+        ->title('Laboratorio'),
 
       Menu::make(__('Brainstorming'))
         ->icon('chemistry')
@@ -39,6 +40,14 @@ class PlatformProvider extends OrchidServiceProvider
       Menu::make(__('Obsidian'))
         ->icon('diamond')
         ->route('page.obsidian'),
+
+      Menu::make(__('Audio'))
+        ->icon('earphones-alt')
+        ->route('page.voice'),
+
+      Menu::make(__('Imagen'))
+        ->icon('picture')
+        ->route('page.image'),
 
       Menu::make(__('Users'))
         ->icon('user')

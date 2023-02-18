@@ -1,19 +1,6 @@
+import { controlLoading } from './helpers';
+
 document.addEventListener("turbo:load", () => {
-  function controlLoading(activate, text = "Loading...") {
-    var loading = document.getElementById("spinner-container");
-
-    if(loading!=null){
-      if(activate){
-        document.getElementById("spinner-text").innerHTML = text;
-        loading.classList.remove("hidden");
-      }else{
-        if (!loading.classList.contains("hidden")) {
-          loading.classList.add("hidden");
-        }
-      }      
-    }
-  }
-
   const btn_BSubmit = document.getElementById('btn_brainstorming_submit');
   const proposalContainer = document.getElementById('proposal_container');
   const objetivo = document.querySelector('#input_prompt');
@@ -43,7 +30,7 @@ document.addEventListener("turbo:load", () => {
           }else{
             alert("Ha ocurrido un error: " + response.data.error_message);
             controlLoading(false);
-          }          
+          }
         })
         .catch(error => {        
           alert("Ha ocurrido un error");

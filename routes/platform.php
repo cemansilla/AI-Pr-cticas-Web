@@ -6,6 +6,8 @@ use App\Orchid\Screens\DashboardScreen;
 use App\Orchid\Screens\ChatScreen;
 use App\Orchid\Screens\BrainstormingScreen;
 use App\Orchid\Screens\ObsidianScreen;
+use App\Orchid\Screens\VoiceScreen;
+use App\Orchid\Screens\ImageScreen;
 
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
@@ -28,7 +30,6 @@ use Tabuna\Breadcrumbs\Trail;
 
 /*
 - Página 2: Debe tener una interfaz para grabación de audio y que al terminar de grabar haga una petición a la aplicación FastAPI, procesar la respuesta y mostrar el resultado.
-- Página 4: Debe tener un input de texto y un botón que al clickearlo debe hacer una petición a FastAPI y con la respuesta generar un archivo markdown para descarga.
 */
 
 // Main
@@ -43,6 +44,12 @@ Route::screen('/brainstorming', BrainstormingScreen::class)
 
 Route::screen('/obsidian', ObsidianScreen::class)
   ->name('page.obsidian');
+
+Route::screen('/voice', VoiceScreen::class)
+  ->name('page.voice');
+
+Route::screen('/image', ImageScreen::class)
+  ->name('page.image');
 
 // Platform > Profile
 Route::screen('profile', UserProfileScreen::class)

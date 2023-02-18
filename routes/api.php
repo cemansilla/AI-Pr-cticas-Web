@@ -22,4 +22,5 @@ Route::prefix('pyapi')->group(function () {
   Route::post('chat', [App\Http\Controllers\API\FastAPIController::class, 'chat']);
   Route::post('brainstorming', [App\Http\Controllers\API\FastAPIController::class, 'brainstorming']);
   Route::post('obsidian', [App\Http\Controllers\API\FastAPIController::class, 'obsidian']);
+  Route::post('voice', [App\Http\Controllers\API\FastAPIController::class, 'voice']);
 });

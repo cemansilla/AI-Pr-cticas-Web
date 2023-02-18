@@ -5,7 +5,7 @@
 
 <div class="bg-white rounded-top shadow-sm mb-3">
   <div class="row g-0">
-    <div class="col mt-6 p-4">  
+    <div class="col mt-6 p-4">
       <div class="row">
         <div class="col-md-6">
           <form>
@@ -37,8 +37,7 @@
           @include('partials.loading')
           <div id="proposal_container"></div>
         </div>
-      </div>    
-      
+      </div>      
     </div>
   </div>
 </div>
