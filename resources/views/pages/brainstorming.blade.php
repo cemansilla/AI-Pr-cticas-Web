@@ -1,6 +1,6 @@
 @push('head')
 <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/brainstorming.js') }}"></script>
 @endpush
 
 <div class="bg-white rounded-top shadow-sm mb-3">

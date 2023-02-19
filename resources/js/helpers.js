@@ -78,7 +78,7 @@ function getCurrentHour(){
 export function writeMessage(self, message, container){
   let hour = getCurrentHour();
 
-  messageRow = getChatMessageTemplate(self, message, hour);
+  const messageRow = getChatMessageTemplate(self, message, hour);
   container.appendChild(messageRow);
   container.scrollTo(0, container.scrollHeight);
 }

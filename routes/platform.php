@@ -27,11 +27,6 @@ use Tabuna\Breadcrumbs\Trail;
 | contains the need "dashboard" middleware group. Now create something great!
 |
 */
-
-/*
-- Página 2: Debe tener una interfaz para grabación de audio y que al terminar de grabar haga una petición a la aplicación FastAPI, procesar la respuesta y mostrar el resultado.
-*/
-
 // Main
 Route::screen('/dashboard', DashboardScreen::class)
   ->name('platform.main');

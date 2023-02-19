@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -15,8 +16,61 @@ class FastAPIController extends Controller
     $this->client = new Client();
   }
 
+  public function image(Request $request)
+  {
+    $response = [
+      'success' => false,
+      'error_message' => "UNKNOWN"
+    ];
+
+    $prompt = $request->input('prompt');
+
+    $data = [
+      'prompt' => $prompt
+    ];
+
+    $api_response = $this->client->post(env('API_PYTHON_BASE_URL') . "pyapi/image", [
+      'json' => $data
+    ]);
+
+    if($api_response->getStatusCode() == 200){
+      $stable_diffusion_response = json_decode($api_response->getBody()->getContents());
+
+      $response = [
+        'success' => true,
+        'image' => env('API_PYTHON_BASE_URL') . "images/" . $stable_diffusion_response->file_name
+      ];
+    }
+
+    return response()->json($response);
+  }
+
+  public function imageHandler(Request $request)
+  {
+    $response = [
+      'success' => false,
+      'error_message' => "UNKNOWN"
+    ];
+
+    $filename = $request->get('file_name');
+    $remote_url = env('API_PYTHON_BASE_URL') . 'images/' . $filename;
+
+    $response = [
+      'success' => true,
+      'image_url' => $remote_url,
+      'filename' => $filename
+    ];
+
+    return response()->json($response);
+  }
+
   public function chat(Request $request)
   {
+    $response = [
+      'success' => false,
+      'error_message' => "UNKNOWN"
+    ];
+
     $message = $request->input('message');
 
     $data = [
@@ -27,9 +81,6 @@ class FastAPIController extends Controller
       'json' => $data
     ]);
 
-    $response = [
-      'success' => false
-    ];
     if($api_response->getStatusCode() == 200){
       $response = [
         'success' => true,

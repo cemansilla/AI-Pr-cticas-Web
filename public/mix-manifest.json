@@ -1,4 +1,9 @@
 {
     "/js/app.js": "/js/app.js",
+    "/js/brainstorming.js": "/js/brainstorming.js",
+    "/js/chat.js": "/js/chat.js",
+    "/js/obsidian.js": "/js/obsidian.js",
+    "/js/voice.js": "/js/voice.js",
+    "/js/image.js": "/js/image.js",
     "/css/app.css": "/css/app.css"
 }
