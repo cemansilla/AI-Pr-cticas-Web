@@ -3,8 +3,8 @@ import { controlLoading } from './helpers';
 document.addEventListener("turbo:load", () => {
   const btn_OSubmit = document.getElementById('btn_obsidian_submit');  
   const proposalMdContainer = document.getElementById('obsidian_md_container');
-  const materia = document.querySelector('#input_obsidian_materia');
-  const temas = document.querySelector('#input_obsidian_temas');
+  let materia = document.querySelector('#input_obsidian_materia');
+  let temas = document.querySelector('#input_obsidian_temas');
 
   if(btn_OSubmit!=null && proposalMdContainer != null && materia!=null && temas!=null){
     btn_OSubmit.addEventListener('click', function() {
@@ -16,7 +16,7 @@ document.addEventListener("turbo:load", () => {
         btn_ODownload.remove();
       }
 
-      const data = {
+      let data = {
         materia: materia.value,
         temas: temas.value
       };
@@ -30,9 +30,9 @@ document.addEventListener("turbo:load", () => {
             markdownText2HTML = markdownText2HTML.replace(/\\n/g, '<br>');
             proposalMdContainer.innerHTML = markdownText2HTML;
   
-            const blob = new Blob([markdownText], { type: 'text/markdown' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
+            let blob = new Blob([markdownText], { type: 'text/markdown' });
+            let url = URL.createObjectURL(blob);
+            let link = document.createElement('a');
             link.setAttribute('type', 'button');
             link.setAttribute('id', 'btn_download_obsidian');
             link.classList.add('btn', 'btn-secondary');

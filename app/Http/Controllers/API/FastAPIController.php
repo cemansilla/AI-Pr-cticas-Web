@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\API;
 
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -18,15 +17,19 @@ class FastAPIController extends Controller
 
   public function image(Request $request)
   {
+    set_time_limit(0);
+
     $response = [
       'success' => false,
       'error_message' => "UNKNOWN"
     ];
 
     $prompt = $request->input('prompt');
+    $ckpt = $request->input('ckpt');
 
     $data = [
-      'prompt' => $prompt
+      'prompt' => $prompt,
+      'ckpt' => $ckpt
     ];
 
     $api_response = $this->client->post(env('API_PYTHON_BASE_URL') . "pyapi/image", [
@@ -35,6 +38,7 @@ class FastAPIController extends Controller
 
     if($api_response->getStatusCode() == 200){
       $stable_diffusion_response = json_decode($api_response->getBody()->getContents());
+      Log::debug('stable_diffusion_response', [$stable_diffusion_response]);
 
       $response = [
         'success' => true,

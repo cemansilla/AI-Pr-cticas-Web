@@ -19,10 +19,10 @@ document.addEventListener("turbo:load", () => {
           });
 
           mediaRecorder.addEventListener("stop", function () {
-            const audioBlob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' });
-            const audioName = generateRandom();
+            let audioBlob = new Blob(chunks, { 'type': 'audio/ogg; codecs=opus' });
+            let audioName = generateRandom();
 
-            const formData = new FormData();
+            let formData = new FormData();
             formData.append('audio_file', audioBlob, `${audioName}.ogg`);
 
             proposalContainer.innerHTML = "";

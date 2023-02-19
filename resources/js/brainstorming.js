@@ -3,16 +3,16 @@ import { controlLoading } from './helpers';
 document.addEventListener("turbo:load", () => {
   const btn_BSubmit = document.getElementById('btn_brainstorming_submit');
   const proposalContainer = document.getElementById('proposal_container');
-  const objetivo = document.querySelector('#input_prompt');
-  const destino = document.querySelector('#input_destination');
-  const excluir = document.querySelector('#input_exclude');
+  let objetivo = document.querySelector('#input_prompt');
+  let destino = document.querySelector('#input_destination');
+  let excluir = document.querySelector('#input_exclude');
 
   if(btn_BSubmit!=null && proposalContainer != null && objetivo!=null && destino!=null && excluir!=null){
     btn_BSubmit.addEventListener('click', function() {
       proposalContainer.innerHTML = "";
       controlLoading(true);
 
-      const data = {
+      let data = {
         objetivo: objetivo.value,
         destino: destino.value,
         excluir: excluir.value

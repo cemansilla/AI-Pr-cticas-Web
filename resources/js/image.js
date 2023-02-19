@@ -3,10 +3,11 @@ import { controlLoading } from './helpers';
 document.addEventListener("turbo:load", () => {
   const btn_BSubmit = document.getElementById('btn_image_submit');
   const imageContainer = document.getElementById('image_sd_result');
-  const objetivo = document.querySelector('#input_image_prompt');
-  const excluir = document.querySelector('#input_image_exclude');
+  let objetivo = document.querySelector('#input_image_prompt');
+  let ckpt = document.querySelector('#input_image_ckpt');
+  let excluir = document.querySelector('#input_image_exclude');
 
-  if(btn_BSubmit!=null && imageContainer != null && objetivo!=null && excluir!=null){
+  if(btn_BSubmit!=null && imageContainer != null && objetivo!=null && ckpt!=null && excluir!=null){
     btn_BSubmit.addEventListener('click', function() {
       imageContainer.src = "";
       if (!imageContainer.classList.contains('hidden')) {
@@ -14,8 +15,9 @@ document.addEventListener("turbo:load", () => {
       }
       controlLoading(true);
 
-      const data = {
+      let data = {
         prompt: objetivo.value,
+        ckpt: ckpt.value,
         excluir: excluir.value
       };
 
