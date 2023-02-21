@@ -19,5 +19,6 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/image.js', 'public/js')
     .js('resources/js/post-rrss.js', 'public/js')
     .js('resources/js/sentiment.js', 'public/js')
+    .js('resources/js/text-to-speech.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .sourceMaps();

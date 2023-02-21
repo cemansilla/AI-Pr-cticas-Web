@@ -20,7 +20,6 @@ document.addEventListener("turbo:load", () => {
 
       axios.post('/api/pyapi/sentiment', data)
         .then(response => {
-          console.log(response);
           if(response.data.success){
             let proposal = response.data.analysys_response.diagnosis;
             proposal = proposal.replace(/\n/g, "<br>");

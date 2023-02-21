@@ -287,6 +287,46 @@ class FastAPIController extends Controller
     return response()->json($response);
   }
 
+  public function textToSpeech(Request $request)
+  {
+    $response = [
+      'success' => false,
+      'error_message' => 'UNKNOWN'
+    ];
+
+    $texto = $request->input('text');
+
+    if(!is_null($texto)){
+      try{
+        $data = [
+          'text' => $texto
+        ];
+
+        $api_response = $this->client->post(env('API_PYTHON_BASE_URL') . "pyapi/text-to-speech", [
+          'json' => $data
+        ]);
+    
+        if($api_response->getStatusCode() == 200){
+          $response_data = json_decode($api_response->getBody()->getContents());
+  
+          $remote_url = env('API_PYTHON_BASE_URL') . 'audios/text-to-speech/' . $response_data->file_name;
+
+          $response = [
+            'success' => true,
+            'audio_url' => $remote_url
+          ];
+        }
+      }catch(\Exception $e){
+        $response = [
+          'success' => false,
+          'error_message' => $e->getMessage()
+        ];
+      }
+    }
+
+    return response()->json($response);
+  }
+
   public function obsidian(Request $request)
   {
     $materia = $request->input('materia');

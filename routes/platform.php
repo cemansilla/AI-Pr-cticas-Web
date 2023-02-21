@@ -8,6 +8,7 @@ use App\Orchid\Screens\BrainstormingScreen;
 use App\Orchid\Screens\SentimentScreen;
 use App\Orchid\Screens\ObsidianScreen;
 use App\Orchid\Screens\VoiceScreen;
+use App\Orchid\Screens\TextToSpeechScreen;
 use App\Orchid\Screens\ImageScreen;
 use App\Orchid\Screens\RRSSPostScreen;
 
@@ -47,6 +48,9 @@ Route::screen('/obsidian', ObsidianScreen::class)
 
 Route::screen('/voice', VoiceScreen::class)
   ->name('page.voice');
+
+Route::screen('/text-to-speech', TextToSpeechScreen::class)
+  ->name('page.text-to-speech');
 
 Route::screen('/image', ImageScreen::class)
   ->name('page.image');

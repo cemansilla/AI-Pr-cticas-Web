@@ -49,6 +49,10 @@ class PlatformProvider extends OrchidServiceProvider
         ->icon('microphone')
         ->route('page.voice'),
 
+      Menu::make(__('Text to Speech'))
+        ->icon('microphone')
+        ->route('page.text-to-speech'),
+
       Menu::make(__('Imagen'))
         ->icon('picture')
         ->route('page.image'),
