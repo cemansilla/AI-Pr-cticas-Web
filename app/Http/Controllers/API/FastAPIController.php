@@ -196,6 +196,42 @@ class FastAPIController extends Controller
     return response()->json($response);
   }
 
+  public function sentiment(Request $request)
+  {
+    $response = [
+      'success' => false,
+      'error_message' => 'UNKNOWN'
+    ];
+
+    $texto = $request->input('text');
+
+    if(!is_null($texto)){
+      $data = [
+        'text' => $texto
+      ];
+  
+      $api_response = $this->client->post(env('API_PYTHON_BASE_URL') . "pyapi/sentiment", [
+        'json' => $data
+      ]);
+      
+      if($api_response->getStatusCode() == 200){
+        $analysys_response = json_decode($api_response->getBody()->getContents());
+
+        $response = [
+          'success' => true,
+          'analysys_response' => $analysys_response
+        ];
+      }
+    }else{
+      $response = [
+        'success' => false,
+        'error_message' => 'El disparador o concepto es requerido.'
+      ];
+    }
+
+    return response()->json($response);
+  }
+
   public function voice(Request $request)
   {
     $response = [

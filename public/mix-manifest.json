@@ -6,5 +6,6 @@
     "/js/voice.js": "/js/voice.js",
     "/js/image.js": "/js/image.js",
     "/js/post-rrss.js": "/js/post-rrss.js",
+    "/js/sentiment.js": "/js/sentiment.js",
     "/css/app.css": "/css/app.css"
 }

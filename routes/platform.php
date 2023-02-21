@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Orchid\Screens\DashboardScreen;
 use App\Orchid\Screens\ChatScreen;
 use App\Orchid\Screens\BrainstormingScreen;
+use App\Orchid\Screens\SentimentScreen;
 use App\Orchid\Screens\ObsidianScreen;
 use App\Orchid\Screens\VoiceScreen;
 use App\Orchid\Screens\ImageScreen;
@@ -37,6 +38,9 @@ Route::screen('/chat', ChatScreen::class)
 
 Route::screen('/brainstorming', BrainstormingScreen::class)
   ->name('page.brainstorming');
+
+Route::screen('/sentiment', SentimentScreen::class)
+  ->name('page.sentiment');
 
 Route::screen('/obsidian', ObsidianScreen::class)
   ->name('page.obsidian');
