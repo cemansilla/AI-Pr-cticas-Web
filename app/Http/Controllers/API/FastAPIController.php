@@ -15,6 +15,40 @@ class FastAPIController extends Controller
     $this->client = new Client();
   }
 
+  public function postRRSS(Request $request)
+  {
+    set_time_limit(0);
+
+    $response = [
+      'success' => false,
+      'error_message' => "UNKNOWN"
+    ];
+
+    $prompt = $request->input('prompt');
+    $destino = $request->input('destino');
+
+    $data = [
+      'prompt' => $prompt,
+      'destino' => $destino
+    ];
+
+    $api_response = $this->client->post(env('API_PYTHON_BASE_URL') . "pyapi/post-rrss", [
+      'json' => $data
+    ]);
+
+    if($api_response->getStatusCode() == 200){
+      $post_screen_response = json_decode($api_response->getBody()->getContents());
+
+      $response = [
+        'success' => true,
+        'text' => $post_screen_response->results->text,
+        'image' => env('API_PYTHON_BASE_URL') . "images/" . $post_screen_response->results->image
+      ];
+    }
+
+    return response()->json($response);
+  }
+
   public function image(Request $request)
   {
     set_time_limit(0);
@@ -38,7 +72,6 @@ class FastAPIController extends Controller
 
     if($api_response->getStatusCode() == 200){
       $stable_diffusion_response = json_decode($api_response->getBody()->getContents());
-      Log::debug('stable_diffusion_response', [$stable_diffusion_response]);
 
       $response = [
         'success' => true,

@@ -42,12 +42,16 @@ class PlatformProvider extends OrchidServiceProvider
         ->route('page.obsidian'),
 
       Menu::make(__('Audio'))
-        ->icon('earphones-alt')
+        ->icon('microphone')
         ->route('page.voice'),
 
       Menu::make(__('Imagen'))
         ->icon('picture')
         ->route('page.image'),
+
+      Menu::make(__('Posteo RRSS'))
+        ->icon('magic-wand')
+        ->route('page.post-rrss'),
 
       Menu::make(__('Users'))
         ->icon('user')

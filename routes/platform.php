@@ -8,6 +8,7 @@ use App\Orchid\Screens\BrainstormingScreen;
 use App\Orchid\Screens\ObsidianScreen;
 use App\Orchid\Screens\VoiceScreen;
 use App\Orchid\Screens\ImageScreen;
+use App\Orchid\Screens\RRSSPostScreen;
 
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
@@ -45,6 +46,9 @@ Route::screen('/voice', VoiceScreen::class)
 
 Route::screen('/image', ImageScreen::class)
   ->name('page.image');
+
+Route::screen('/post-rrss', RRSSPostScreen::class)
+  ->name('page.post-rrss');
 
 // Platform > Profile
 Route::screen('profile', UserProfileScreen::class)

@@ -25,7 +25,7 @@
               <label for="input_image_ckpt">Modelo (.ckpt)</label>
               <select class="form-control" id="input_image_ckpt">
                 <option value="">Default</option>
-                <option value="dreamshaper">Dream Shaper</option>
+                <option value="dreamshaper" selected>Dream Shaper</option>
                 <option value="inkpunk_diffusion">Ink Punk Diffusion</option>
                 <option value="cedamansilla">Custom trained [cedamansilla]</option>
               </select>
